@@ -1,0 +1,104 @@
+ <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+
+          <?= form_error('name_image', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+
+          <?= $this->session->flashdata('message');?>
+
+          
+
+          <div class="row">
+          	<div class="col-lg">
+          		<?= form_open_multipart('slide'); ?>
+          		<a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newSliderModal">Add New Slider</a>
+          		<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      
+				      <th scope="col">Image</th>				     
+				      <th scope="col">Action</th>				     
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<?php $i = 1; ?>
+				  	<?php  foreach ($slider as $s) :?>
+				    <tr>
+				      <th scope="row"><?= $i; ?></th>
+				      
+				      <td class="col-sm-4"><img src="<?= base_url('asset/img/slider/') . $s['img_slider']; ?>" class="img-thumbnail"></td>
+				      <td>
+				      	<a href="<?= base_url(); ?>slideredit?ID=<?= $s['slider_id'] ?>" class="badge badge-success">Edit</a>
+				      	<a href="<?= base_url(); ?>sliderhapus?ID=<?= $s['slider_id'] ?>" class="badge badge-danger tombol">Delete</a>
+
+				      </td>
+				    </tr>
+				    <?php $i++; ?>
+					<?php endforeach; ?>
+				    
+				  </tbody>
+				</table>
+          	</div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Button trigger modal -->
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="newSliderModal" tabindex="-1" role="dialog" aria-labelledby="newSliderModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="newSliderModalLabel">Add New Slider</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <form action="<?= base_url('slide'); ?>" method="post">
+	      <div class="modal-body">
+	        <div class="form-group">    
+		    <input type="text" class="form-control mb-2" id="name_image" name="name_image" placeholder="Image Name">
+		    <div class="form-group row">
+		    <div class="col-sm-2">Picture</div>
+		    <div class="col-sm-10">
+		    	<div class="row">
+		    		<div class="col-sm-3">
+		    			<img src="<?= base_url('asset/img/slider/defaultSlider.jpg'); ?>" class="img-thumbnail">
+		    		</div>
+		    		<div class="col-sm-9">
+		    			<div class="custom-file">
+					  <input type="file" class="custom-file-input" id="image" name="image">
+					  <label class="custom-file-label" for="image">Choose file</label>
+					</div>
+		    		</div>		    		
+		    </div>
+		    </div>
+		    </div>		    
+		  </div>
+		    <div class="form-check">
+				<input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>
+				<label class="form-check-label" for="is_active">
+			    Active?
+			</label>
+		  </div>
+	      </div>
+	
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary">Add</button>
+	      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+
+	
